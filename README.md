@@ -50,6 +50,7 @@ docker compose up --build               # or the full containerized stack
 | [docs/CONFIGURATION.md](docs/CONFIGURATION.md) | Every env var and agent container contract |
 | [docs/OPERATIONS.md](docs/OPERATIONS.md) | Day-2 ops: monitoring, logs, backup, troubleshooting |
 | [docs/API.md](docs/API.md) | External `v1` API reference |
+| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Hosting options, CI/CD pipeline, required credentials |
 | [docs/TESTING.md](docs/TESTING.md) | Test layout, how to run, adding tests |
 
 ## Scripts
