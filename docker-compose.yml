@@ -1,0 +1,36 @@
+# Reference compose stack: dashboard + a network for agent containers.
+#
+#   docker compose up --build
+#
+# The dashboard mounts the host Docker socket so it can provision agent
+# containers. Restrict access accordingly (or point HH_DOCKER_HOST at a
+# TCP/socket proxy with TLS).
+
+services:
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      HH_ADMIN_EMAIL: admin@example.com
+      HH_ADMIN_PASSWORD: change-me
+      HH_PROVISIONER: docker
+      HH_DOCKER_SOCKET: /var/run/docker.sock
+      HH_DOCKER_NETWORK: hosted-hermes
+      HH_STORE_PATH: /app/data/hosted-hermes.json
+    volumes:
+      - hermes-data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    networks:
+      - hosted-hermes
+
+volumes:
+  hermes-data:
+
+networks:
+  hosted-hermes:
+    name: hosted-hermes
+    driver: bridge
